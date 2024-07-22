@@ -1,12 +1,12 @@
-FROM python:3.9-slim  # Use a lightweight Python base image
+FROM python:3.9-slim
 
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install -r requirements.txt  # Install dependencies from requirements.txt
+RUN pip install -r requirements.txt
 
 COPY . .
 
-EXPOSE 5000  # Expose port 5000 for the Flask app
+EXPOSE 5000
 
-CMD ["python", "main.py"]  # Start the Flask app using `python main.py`
+CMD ["python", "main.py"]
