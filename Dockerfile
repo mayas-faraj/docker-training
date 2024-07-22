@@ -1,17 +1,12 @@
-FROM node:10-alpine
+FROM python:3.9-slim  # Use a lightweight Python base image
 
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /app
 
-WORKDIR /home/node/app
+COPY requirements.txt .
+RUN pip install -r requirements.txt  # Install dependencies from requirements.txt
 
-COPY package*.json ./
+COPY . .
 
-USER node
+EXPOSE 5000  # Expose port 5000 for the Flask app
 
-RUN npm install
-
-COPY --chown=node:node . .
-
-EXPOSE 8080
-
-CMD [ "node", "app.js" ]
+CMD ["python", "main.py"]  # Start the Flask app using `python main.py`
